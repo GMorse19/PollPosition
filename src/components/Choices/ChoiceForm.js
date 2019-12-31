@@ -13,7 +13,7 @@ const ChoiceForm = ({ props, subjectId, choice, handleSubmit, handleChange, canc
           <Form.Control
             required
             type="text"
-            value={props.match.params.id}
+            value={choice.subject_id}
             name="subject_id"
             onChange={handleChange}
           />

@@ -9,7 +9,7 @@ const ChoiceEdit = (props) => {
   const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
   const [updated, setUpdated] = useState(false)
   // choice.subject_id = props.match.params.id
-  console.log(props)
+  console.log(props.match.url)
 
   const handleChange = event => {
     event.persist()
