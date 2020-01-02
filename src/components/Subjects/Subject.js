@@ -40,11 +40,13 @@ const Subject = props => {
       })
   }
 
+  // const handleVote = function () {
+  //   choice.vote += 1
+  // }
+
   if (!subject) {
     return <p>Loading...</p>
   }
-
-  console.log(subject.choices)
 
   const choicesJsx = subject.choices.map(choice => (
     <div key={choice.id}>
