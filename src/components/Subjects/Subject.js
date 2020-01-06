@@ -7,10 +7,10 @@ import apiUrl from '../../apiConfig'
 
 const Subject = props => {
   const [subject, setSubject] = useState(null)
-  const userId = props.user ? props.user_id : null
+  const userId = props.user ? props.user.id : null
   // const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
   // const [updated, setUpdated] = useState(false)
-
+  console.log(props)
   useEffect(() => {
     axios({
       url: `${apiUrl}/subjects/${props.match.params.id}`,
@@ -61,6 +61,7 @@ const Subject = props => {
 
   return (
     <div className="subject-board">
+      <h1>UserId: {userId}</h1>
       <h1>Title: {subject.title}</h1>
       <h3>Description: {subject.description}</h3>
       <h3>ID: {subject.id}</h3>
@@ -68,7 +69,7 @@ const Subject = props => {
       <h2 style={{ textAlign: 'center' }}>Choices: {choicesJsx}</h2>
       <div>
         <Button href={`#subjects/${props.match.params.id}/edit`} variant="primary" className="mr-2">Update</Button>
-        {userId === subject.user_id && <Button onClick={handleDelete} className="btn btn-danger">delete</Button>}
+        {userId === subject.user.id && <Button onClick={handleDelete} className="btn btn-danger">delete</Button>}
         <Button href={`#subjects/${props.match.params.id}/create-choice`} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
       </div>
     </div>
