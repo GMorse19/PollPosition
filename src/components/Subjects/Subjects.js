@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container'
 
 const Subjects = props => {
   const [subjects, setSubjects] = useState([])
-  const userId = props.user.id
+  // const userId = props.user.id
   // const [choices, setChoices] = useState([])
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Subjects = props => {
 
   const subjectsJsx = subjects.map(subject => (
     <div key={subject.id}>
-      {userId === subject.user.id && <Button className="box list inner-shadow" as={'a'} href={`#/subjects/${subject.id}`}><p className="text-shadow">Subject ID : {subject.id}<br/>Title: {subject.title} <br /> Description: {subject.description}<br/>by - {subject.user.email}</p></Button>}
+      {<Button className="box list inner-shadow" as={'a'} href={`#/subjects/${subject.id}`}><p className="text-shadow">Subject ID : {subject.id}<br/>Title: {subject.title} <br /> Description: {subject.description}<br/>by - {subject.user.email}</p></Button>}
     </div>
   ))
 
