@@ -22,7 +22,7 @@ const Subjects = props => {
       .then(response => {
         setSubjects(response.data.subjects)
         // setChoices(response.data.subjects.choices)
-        console.log(response.data.subjects[0].choices)
+        console.log(response.data.subjects[1].choices)
       })
       // .then(() => props.alert({ heading: 'Success', message: 'You got Subjects', variant: 'success' }))
       .catch(console.error)
