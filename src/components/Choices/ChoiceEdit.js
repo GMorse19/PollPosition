@@ -6,13 +6,14 @@ import apiUrl from '../../apiConfig'
 // import ChoiceForm from './ChoiceForm'
 
 const ChoiceEdit = (props) => {
+  // const [subject, setSubject] = useState({ title: '', description: '' })
   const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
   const [updated, setUpdated] = useState(false)
   const [voted, setVoted] = useState(false)
   // const [vote, setVote] = useState(0)
   // choice.subject_id = props.match.params.id
   // console.log(props.match.params)
-  // console.log(vote)
+  // console.log(props)
   // const addVote = function () {
   //   choice.vote += 1
   //   updateVote()
@@ -43,7 +44,13 @@ const ChoiceEdit = (props) => {
   // }
 
   // choice.vote += 1
-  console.log(choice.vote)
+  // console.log(choice.vote)
+  // console.log(choice.name)
+  // console.log(choice.description)
+  console.table(choice.subject)
+  console.log(choice)
+  console.log(choice.subject)
+  // (Object.keys(obj).find(key => obj[key] === highkey))
   // console.log(vote)
 
   const updateVote = () => {
@@ -57,6 +64,7 @@ const ChoiceEdit = (props) => {
     })
       .then(res => {
         setUpdated(true)
+        setChoice(choice)
       })
       .catch(console.error)
   }
@@ -78,8 +86,6 @@ const ChoiceEdit = (props) => {
   //     })
   //     .catch(() => props.alert({ heading: 'Nah...', message: 'That didn\'t work', variant: 'danger' }))
   // }
-
-  console.log(choice)
 
   const addVote = function () {
     choice.vote += 1

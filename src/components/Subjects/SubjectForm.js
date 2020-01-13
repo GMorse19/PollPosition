@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const SubjectForm = ({ subject, noNums, handleSubmit, handleChange, cancelPath }) => (
+const SubjectForm = ({ subject, handleSubmit, handleChange, cancelPath }) => (
   <div className="subject-board row">
     <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <Form onSubmit={handleSubmit}>
@@ -13,7 +13,6 @@ const SubjectForm = ({ subject, noNums, handleSubmit, handleChange, cancelPath }
           <Form.Control
             required
             type="text"
-            onKeyPress={(e) => noNums(e)}
             placeholder="Title..."
             value={subject.title}
             name="title"

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
+import Choice from '../Choices/Choice.js'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
@@ -11,6 +12,7 @@ const Subject = props => {
   // const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
   // const [updated, setUpdated] = useState(false)
   console.log(props.user_id)
+  // console.log(choice)
   useEffect(() => {
     axios({
       url: `${apiUrl}/subjects/${props.match.params.id}`,
@@ -51,18 +53,14 @@ const Subject = props => {
 
   const choicesJsx = subject.choices.map(choice => (
     <div key={choice.id}>
-      <h4>{choice.name} : {choice.description} :: {props.match.params.id}/{choice.id} - {choice.vote} -</h4>
-      <Button href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`} subject={subject} choice={choice} variant="danger" className="mr-2">Vote</Button>
+      <h4>{choice.name} : {choice.description} :: {props.match.params.id}/{choice.id} - {choice.vote} -
+        <Button href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`} subject={subject} choice={choice} variant="danger" className="mr-2">Vote</Button>
+      </h4>
     </div>
   ))
 
-  // const addVote = subject.choices.map(choice => (
-  //   choice.vote += 1
-  // ))
-
   return (
     <div className="subject-board">
-      <h1>UserId: {userId}</h1>
       <h1>Title: {subject.title}</h1>
       <h3>Description: {subject.description}</h3>
       <h3>ID: {subject.id}</h3>
@@ -73,6 +71,16 @@ const Subject = props => {
         {userId === subject.user_id && <Button onClick={handleDelete} className="btn btn-danger">delete</Button>}
         <Button href={`#subjects/${props.match.params.id}/create-choice`} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
       </div>
+      <h4>Choices: {subject.choices.map(choice => (
+        <Choice
+          key={choice.id}
+          props={props}
+          name={choice.name}
+          description={choice.description}
+          vote={choice.vote}
+          id={choice.id}
+        />
+      ))}</h4>
     </div>
   )
 }
