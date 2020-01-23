@@ -30,7 +30,7 @@ const Subjects = props => {
 
   const subjectsJsx = subjects.map(subject => (
     <div key={subject.id}>
-      {<Button className="box list inner-shadow" as={'a'} href={`#/subjects/${subject.id}`}><p className="text-shadow">Subject ID : {subject.id}<br/>Title: {subject.title} <br /> Description: {subject.description}<br/>by - {subject.user.email}</p></Button>}
+      {<Button className="subject-container" as={'a'} href={`#/subjects/${subject.id}`}><p className="text-shadow">Subject ID : {subject.id}<br/>Title: {subject.title} <br /> Description: {subject.description}<br/>by - {subject.user.email}</p></Button>}
     </div>
   ))
 
@@ -41,10 +41,10 @@ const Subjects = props => {
   // ))
 
   return (
-    <div className="subject-board">
+    <div style={{ textAlign: 'center' }} className="subject-board">
       <h1>Choose a subject to UPDATE or DELETE.</h1>
       <Container>
-        <Row className="justify-content-md-center">
+        <Row>
           <Col>{subjectsJsx}</Col>
         </Row>
       </Container>
