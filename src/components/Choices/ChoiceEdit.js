@@ -8,6 +8,7 @@ import apiUrl from '../../apiConfig'
 const ChoiceEdit = (props) => {
   // const [subject, setSubject] = useState({ title: '', description: '' })
   const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
+  // const [subject, setSubject] = useState({})
   const [updated, setUpdated] = useState(false)
   const [voted, setVoted] = useState(false)
   // const [vote, setVote] = useState(0)
@@ -47,9 +48,13 @@ const ChoiceEdit = (props) => {
   // console.log(choice.vote)
   // console.log(choice.name)
   // console.log(choice.description)
-  console.table(choice.subject)
-  console.log(choice)
-  console.log(choice.subject)
+  const subject = choice.subject
+  const arr = []
+  for (const key in subject) {
+    arr.push(subject[key])
+  }
+  console.log(arr[0])
+  // console.log(choice.subject)
   // (Object.keys(obj).find(key => obj[key] === highkey))
   // console.log(vote)
 
@@ -97,7 +102,8 @@ const ChoiceEdit = (props) => {
   // }
 
   if (updated) {
-    return <Redirect to={'/subjects'} />
+    console.log(arr[0] + 'Hooray')
+    return <Redirect to={`/subjects/${arr[0]}`} />
   }
 
   if (voted) {
