@@ -15,6 +15,7 @@ import SubjectEdit from '../Subjects/SubjectEdit.js'
 import ChoiceCreate from '../Choices/ChoiceCreate.js'
 import Choices from '../Choices/Choices.js'
 import ChoiceEdit from '../Choices/ChoiceEdit.js'
+import Home from '../Home/Home.js'
 
 class App extends Component {
   constructor () {
@@ -60,6 +61,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
+          )} />
+          <Route exact path='/' render={() => (
+            <Home alert={this.alert} setUser={this.setUser} />
           )} />
           <AuthenticatedRoute user={user} exact path='/subjects' render={() => (
             <Subjects alert={this.alert} user={user} />
