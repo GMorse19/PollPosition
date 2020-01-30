@@ -6,7 +6,7 @@ import './Home.scss'
 
 const Home = () => {
   return (
-    <Container fluid="md">
+    <Container className="home-container">
       <Row className="box">
         <Col>
           <img
