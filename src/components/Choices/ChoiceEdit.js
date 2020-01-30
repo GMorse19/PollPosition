@@ -103,7 +103,7 @@ const ChoiceEdit = (props) => {
 
   if (updated) {
     console.log(arr[0] + 'Hooray')
-    return <Redirect to={`/subjects/${arr[0]}`} />
+    return <Redirect to={'/subjects'} />
   }
 
   if (voted) {
