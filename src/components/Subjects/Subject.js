@@ -58,12 +58,6 @@ const Subject = props => {
   }
 
   const choicesJsx = subject.choices.map(choice => (
-<<<<<<< HEAD
-    <div key={choice.id}>
-      <h4>{choice.name} : {choice.description} :: {props.match.params.id}/{choice.id} - {choice.vote} -
-        <Button href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`} subject={subject} choices={choice} variant="danger" className="mr-2">Vote</Button>
-      </h4>
-=======
     <div className='homepage' key={choice.id}>
       <Col lg={3} xs={3} md={3}>
         <div className='menu-item'>
@@ -84,7 +78,6 @@ const Subject = props => {
           </div>
         </div>
       </Col>
->>>>>>> developmentTwo
     </div>
   ))
 
