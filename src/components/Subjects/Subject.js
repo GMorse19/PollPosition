@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
-import Choice from '../Choices/Choice.js'
+// import Choice from '../Choices/Choice.js'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
@@ -8,10 +8,10 @@ import apiUrl from '../../apiConfig'
 
 const Subject = props => {
   const [subject, setSubject] = useState(null)
-  const userId = props.user ? props.user_id : null
+  const userId = props.user ? props.user.id : null
   // const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
   // const [updated, setUpdated] = useState(false)
-  console.log(props.user_id)
+  console.log(props.user.id)
   // console.log(choice)
   useEffect(() => {
     axios({
@@ -60,27 +60,18 @@ const Subject = props => {
   ))
 
   return (
-    <div className="subject-board">
-      <h1>Title: {subject.title}</h1>
-      <h3>Description: {subject.description}</h3>
-      <h3>ID: {subject.id}</h3>
-      <h3>User: {subject.user.email}</h3>
+    <div className="padding subject-board">
+      <div className="">
+        {userId === subject.user.id && <Button href={`#subjects/${props.match.params.id}/edit`} variant="primary" className="mr-2">Update Your Subject</Button>}
+        {userId === subject.user.id && <Button onClick={handleDelete} className="btn btn-danger">Remove Your Subject</Button>}
+      </div>
+      <h1 className="subject-header" style={{ color: 'blue', fontSize: '100px', fontFamily: 'Bangers' }}>Title: {subject.title}</h1>
+      <h3 style={{ color: 'blue' }}>{subject.description}</h3>
+      <h3 style={{ color: 'blue' }}>Created by: {subject.user.email}</h3>
       <h2 style={{ textAlign: 'center' }}>Choices: {choicesJsx}</h2>
       <div>
-        <Button href={`#subjects/${props.match.params.id}/edit`} variant="primary" className="mr-2">Update</Button>
-        {userId === subject.user_id && <Button onClick={handleDelete} className="btn btn-danger">delete</Button>}
         <Button href={`#subjects/${props.match.params.id}/create-choice`} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
       </div>
-      <h4>Choices: {subject.choices.map(choice => (
-        <Choice
-          key={choice.id}
-          props={props}
-          name={choice.name}
-          description={choice.description}
-          vote={choice.vote}
-          id={choice.id}
-        />
-      ))}</h4>
     </div>
   )
 }
