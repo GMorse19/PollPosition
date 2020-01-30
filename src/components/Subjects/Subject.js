@@ -6,6 +6,7 @@ import axios from 'axios'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 
 import './Subject.scss'
 
@@ -58,18 +59,25 @@ const Subject = props => {
 
   const choicesJsx = subject.choices.map(choice => (
     <div className='homepage' key={choice.id}>
-      {<Col lg={2} xs={2} md={2}>
+      <Col lg={3} xs={3} md={3}>
         <div className='menu-item'>
-          <div className='content'>
-            <h4 className='title'>{choice.name}</h4>
-            <h2 className='title' style={{ color: 'white' }}>Description: </h2>
-            <h2 className='subtitle'>{choice.description}</h2>
-            <h4 className='subtitle'>Vote Count - {choice.vote} -
-              <Button href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`} subject={subject} choice={choice} variant="danger" className="mr-2">Vote</Button>
-            </h4>
+          <div>
+            {<Card className='menu-item' style={{ backgroundColor: 'gray' }}>
+              <Card.Body>
+                <Card.Title className='title'>{choice.name}</Card.Title>
+                <Card.Text>
+                  Description:
+                  <br />
+                  {choice.description}
+                  <br />
+                  Vote Count - {choice.vote}
+                </Card.Text>
+                <Button href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`} subject={subject} choice={choice} variant="danger" className="mr-2">Vote</Button>
+              </Card.Body>
+            </Card>}
           </div>
         </div>
-      </Col>}
+      </Col>
     </div>
   ))
 
@@ -80,20 +88,28 @@ const Subject = props => {
         {userId === subject.user.id && <Button onClick={handleDelete} className="btn btn-danger">Remove Your Subject</Button>}
       </div>
       <h1 className="subject-header" style={{ color: 'blue', fontSize: '100px', fontFamily: 'Bangers' }}>{subject.title}</h1>
-      <div className=''>
-        <h5 className='content' style={{ color: 'blue' }}>Description:</h5><h3 className='subtitle'>{subject.description}</h3>
-        <h5 className='content' style={{ color: 'blue' }}>Created by:</h5><h3 className='subtitle'>{subject.user.email}</h3>
+      <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Row style={{ width: '18rem' }}>
+          <Card className='menu-item' style={{ backgroundColor: 'gray' }}>
+            <Card.Text>
+              <div className=''>
+                <h5 className='title' style={{ color: 'blue' }}>Description:</h5><p className='subtitle'>{subject.description}</p>
+                <h5 className='title' style={{ color: 'blue' }}>Created by:</h5><p className='subtitle'>{subject.user.email}</p>
+              </div>
+            </Card.Text>
+          </Card>
+        </Row>
+      </Container>
+      <h2 style={{ color: 'blue', fontSize: '100px', fontFamily: 'Bangers', textDecorationLine: 'Underline' }}>Choices</h2>
+      <div>
+        <Button href={`#subjects/${props.match.params.id}/create-choice`} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
       </div>
-      <h2 style={{ textAlign: 'center', color: 'blue' }}>Choices:</h2>
       <div className='directory-menu'>
         <Container>
           <Row>
             {choicesJsx}
           </Row>
         </Container>
-      </div>
-      <div>
-        <Button href={`#subjects/${props.match.params.id}/create-choice`} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
       </div>
     </div>
   )
