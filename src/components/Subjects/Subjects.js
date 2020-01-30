@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 
+import './Subject.scss'
+
 const Subjects = props => {
   const [subjects, setSubjects] = useState([])
 
@@ -24,19 +26,31 @@ const Subjects = props => {
   }, [])
 
   const subjectsJsx = subjects.map(subject => (
-    <div key={subject.id}>
-      {<Button className="subject-container" as={'a'} href={`#/subjects/${subject.id}`}><p className="text-shadow">Subject ID : {subject.id}<br/>Title: {subject.title} <br /> Description: {subject.description}<br/>by - {subject.user.email}</p></Button>}
+    <div className='homepage' key={subject.id}>
+      {<Col lg={2} xs={2} md={2}>
+        <Button as={'a'} href={`#/subjects/${subject.id}`}><div className="menu-item">
+          <div className='content'>
+            <h1 className="title">{subject.title}</h1>
+            <p className='subtitle'>Creator: {subject.user.email}</p>
+          </div>
+        </div></Button>
+      </Col>}
     </div>
   ))
 
   return (
-    <div style={{ textAlign: 'center' }} className="subject-board">
-      <h1>Choose a subject to UPDATE or DELETE.</h1>
-      <Container>
-        <Row>
-          <Col>{subjectsJsx}</Col>
-        </Row>
-      </Container>
+    <div>
+      <div style={{ textAlign: 'center' }}>
+        <h1>Choose an Event</h1>
+        <p>Add a choice or cast a vote!</p>
+      </div>
+      <div className='directory-menu'>
+        <Container>
+          <Row>
+            {subjectsJsx}
+          </Row>
+        </Container>
+      </div>
     </div>
   )
 }
