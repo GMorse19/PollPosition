@@ -3,6 +3,11 @@ import Button from 'react-bootstrap/Button'
 // import Choice from '../Choices/Choice.js'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
+
+import './Subject.scss'
 
 import apiUrl from '../../apiConfig'
 
@@ -52,10 +57,19 @@ const Subject = props => {
   }
 
   const choicesJsx = subject.choices.map(choice => (
-    <div key={choice.id}>
-      <h4>{choice.name} : {choice.description} :: {props.match.params.id}/{choice.id} - {choice.vote} -
-        <Button href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`} subject={subject} choice={choice} variant="danger" className="mr-2">Vote</Button>
-      </h4>
+    <div className='homepage' key={choice.id}>
+      {<Col lg={2} xs={2} md={2}>
+        <div className='menu-item'>
+          <div className='content'>
+            <h4 className='title'>{choice.name}</h4>
+            <h2 className='title' style={{ color: 'white' }}>Description: </h2>
+            <h2 className='subtitle'>{choice.description}</h2>
+            <h4 className='subtitle'>Vote Count - {choice.vote} -
+              <Button href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`} subject={subject} choice={choice} variant="danger" className="mr-2">Vote</Button>
+            </h4>
+          </div>
+        </div>
+      </Col>}
     </div>
   ))
 
@@ -65,10 +79,19 @@ const Subject = props => {
         {userId === subject.user.id && <Button href={`#subjects/${props.match.params.id}/edit`} variant="primary" className="mr-2">Update Your Subject</Button>}
         {userId === subject.user.id && <Button onClick={handleDelete} className="btn btn-danger">Remove Your Subject</Button>}
       </div>
-      <h1 className="subject-header" style={{ color: 'blue', fontSize: '100px', fontFamily: 'Bangers' }}>Title: {subject.title}</h1>
-      <h3 style={{ color: 'blue' }}>{subject.description}</h3>
-      <h3 style={{ color: 'blue' }}>Created by: {subject.user.email}</h3>
-      <h2 style={{ textAlign: 'center' }}>Choices: {choicesJsx}</h2>
+      <h1 className="subject-header" style={{ color: 'blue', fontSize: '100px', fontFamily: 'Bangers' }}>{subject.title}</h1>
+      <div className=''>
+        <h5 className='content' style={{ color: 'blue' }}>Description:</h5><h3 className='subtitle'>{subject.description}</h3>
+        <h5 className='content' style={{ color: 'blue' }}>Created by:</h5><h3 className='subtitle'>{subject.user.email}</h3>
+      </div>
+      <h2 style={{ textAlign: 'center', color: 'blue' }}>Choices:</h2>
+      <div className='directory-menu'>
+        <Container>
+          <Row>
+            {choicesJsx}
+          </Row>
+        </Container>
+      </div>
       <div>
         <Button href={`#subjects/${props.match.params.id}/create-choice`} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
       </div>
