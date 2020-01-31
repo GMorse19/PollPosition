@@ -25,7 +25,7 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
+  <Navbar collapseOnSelect fixed="top" bg="secondary" variant="dark" expand="md">
     <Navbar.Brand href="#">
       react-auth-template
     </Navbar.Brand>

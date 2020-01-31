@@ -27,8 +27,8 @@ const Subjects = props => {
 
   const subjectsJsx = subjects.map(subject => (
     <div className='homepage' key={subject.id}>
-      {<Col lg={2} xs={2} md={2}>
-        <Button as={'a'} href={`#/subjects/${subject.id}`}><div className="menu-item">
+      {<Col lg={3} xs={3} md={3}>
+        <Button style={{ backgroundColor: '#fae4ad' }} as={'a'} href={`#/subjects/${subject.id}`}><div className="menu-item">
           <div className='content'>
             <h1 className="title">{subject.title}</h1>
             <p className='subtitle'>Creator: {subject.user.email}</p>

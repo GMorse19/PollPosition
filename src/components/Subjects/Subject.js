@@ -29,7 +29,7 @@ const Subject = props => {
     })
       .then(res => setSubject(res.data.subject))
       .catch(console.error)
-  }, [])
+  }, [subject])
 
   const handleDelete = event => {
     console.log(props.match.params.id)
@@ -46,7 +46,7 @@ const Subject = props => {
       })
       .catch(() => {
         props.alert({ heading: 'Uh Oh!', message: 'You did not delete a subject', variant: 'warning' })
-      })
+      }, [])
   }
 
   // const handleVote = function () {
@@ -62,10 +62,10 @@ const Subject = props => {
       <Col lg={3} xs={3} md={3}>
         <div className='menu-item'>
           <div>
-            {<Card className='menu-item' style={{ backgroundColor: 'gray' }}>
+            {<Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
               <Card.Body>
                 <Card.Title className='title'>{choice.name}</Card.Title>
-                <Card.Text>
+                <Card.Text style={{ color: 'blue' }}>
                   Description:
                   <br />
                   {choice.description}
@@ -87,20 +87,20 @@ const Subject = props => {
         {userId === subject.user.id && <Button href={`#subjects/${props.match.params.id}/edit`} variant="primary" className="mr-2">Update Your Subject</Button>}
         {userId === subject.user.id && <Button onClick={handleDelete} className="btn btn-danger">Remove Your Subject</Button>}
       </div>
-      <h1 className="subject-header" style={{ color: 'blue', fontSize: '100px', fontFamily: 'Bangers' }}>{subject.title}</h1>
+      <h1 className="subject-header" style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>{subject.title}</h1>
       <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Row style={{ width: '18rem' }}>
-          <Card className='menu-item' style={{ backgroundColor: 'gray' }}>
+          <Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
             <Card.Text>
               <div className=''>
-                <h5 className='title' style={{ color: 'blue' }}>Description:</h5><p className='subtitle'>{subject.description}</p>
-                <h5 className='title' style={{ color: 'blue' }}>Created by:</h5><p className='subtitle'>{subject.user.email}</p>
+                <h5 className='title' style={{ color: 'blue' }}>Description:</h5><p style={{ color: 'blue' }} className='subtitle'>{subject.description}</p>
+                <h5 className='title' style={{ color: 'blue' }}>Created by:</h5><p style={{ color: 'blue' }} className='subtitle'>{subject.user.email}</p>
               </div>
             </Card.Text>
           </Card>
         </Row>
       </Container>
-      <h2 style={{ color: 'blue', fontSize: '100px', fontFamily: 'Bangers', textDecorationLine: 'Underline' }}>Choices</h2>
+      <h2 style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers', textDecorationLine: 'Underline' }}>Choices</h2>
       <div>
         <Button href={`#subjects/${props.match.params.id}/create-choice`} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
       </div>
