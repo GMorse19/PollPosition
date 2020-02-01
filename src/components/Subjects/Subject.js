@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
-// import Choice from '../Choices/Choice.js'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import Col from 'react-bootstrap/Col'
@@ -15,10 +14,8 @@ import apiUrl from '../../apiConfig'
 const Subject = props => {
   const [subject, setSubject] = useState(null)
   const userId = props.user ? props.user.id : null
-  // const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
-  // const [updated, setUpdated] = useState(false)
-  console.log(props.user.id)
-  // console.log(choice)
+  const [voted, setVoted] = useState(null)
+
   useEffect(() => {
     axios({
       url: `${apiUrl}/subjects/${props.match.params.id}`,
@@ -28,8 +25,9 @@ const Subject = props => {
       }
     })
       .then(res => setSubject(res.data.subject))
+      .then(() => setVoted(false))
       .catch(console.error)
-  }, [subject])
+  }, [voted])
 
   const handleDelete = event => {
     console.log(props.match.params.id)
@@ -49,9 +47,10 @@ const Subject = props => {
       }, [])
   }
 
-  // const handleVote = function () {
-  //   choice.vote += 1
-  // }
+  const handleClick = function () {
+    setVoted()
+    console.log(voted)
+  }
 
   if (!subject) {
     return <p>Loading...</p>
@@ -72,7 +71,15 @@ const Subject = props => {
                   <br />
                   Vote Count - {choice.vote}
                 </Card.Text>
-                <Button href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`} subject={subject} choice={choice} variant="danger" className="mr-2">Vote</Button>
+                <Button
+                  href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`}
+                  subject={subject}
+                  choice={choice}
+                  onClick={handleClick}
+                  variant="danger"
+                  className="mr-2">
+                  Vote
+                </Button>
               </Card.Body>
             </Card>}
           </div>

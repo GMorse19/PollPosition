@@ -5,7 +5,7 @@ import apiUrl from '../../apiConfig'
 import ChoiceForm from './ChoiceForm.js'
 
 const ChoiceCreate = props => {
-  const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
+  const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '0' })
   choice.subject_id = props.match.params.id
 
   const handleChange = event => {

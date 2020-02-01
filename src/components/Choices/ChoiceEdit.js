@@ -3,22 +3,11 @@ import { Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
-// import ChoiceForm from './ChoiceForm'
 
 const ChoiceEdit = (props) => {
-  // const [subject, setSubject] = useState({ title: '', description: '' })
   const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
-  // const [subject, setSubject] = useState({})
   const [updated, setUpdated] = useState(false)
   const [voted, setVoted] = useState(false)
-  // const [vote, setVote] = useState(0)
-  // choice.subject_id = props.match.params.id
-  // console.log(props.match.params)
-  // console.log(props)
-  // const addVote = function () {
-  //   choice.vote += 1
-  //   updateVote()
-  // }
 
   useEffect(() => {
     axios({
@@ -35,28 +24,11 @@ const ChoiceEdit = (props) => {
       .catch(console.error)
   }, [])
 
-  // const handleChange = event => {
-  //   event.persist()
-  //   setChoice(choice => ({ ...choice, [event.target.name]: event.target.value }))
-  // }
-
-  // const addVote = function () {
-  //   choice.vote += 1
-  // }
-
-  // choice.vote += 1
-  // console.log(choice.vote)
-  // console.log(choice.name)
-  // console.log(choice.description)
-  const subject = choice.subject
+  const sub = choice.subject
   const arr = []
-  for (const key in subject) {
-    arr.push(subject[key])
+  for (const key in sub) {
+    arr.push(sub[key])
   }
-  console.log(arr[0])
-  // console.log(choice.subject)
-  // (Object.keys(obj).find(key => obj[key] === highkey))
-  // console.log(vote)
 
   const updateVote = () => {
     axios({
@@ -70,39 +42,17 @@ const ChoiceEdit = (props) => {
       .then(res => {
         setUpdated(true)
         setChoice(choice)
+        return <Redirect to={`/subjects/${arr[0]}`} />
       })
       .catch(console.error)
   }
-
-  // const handleSubmit = event => {
-  //   event.preventDefault()
-  //
-  //   axios({
-  //     url: `${apiUrl}/choices/${props.match.params.id}`,
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Authorization': `Token token=${props.user.token}`
-  //     },
-  //     data: { choice }
-  //   })
-  //     .then(response => {
-  //       props.alert({ heading: 'Success', message: 'You updated a choice', variant: 'success' })
-  //       // setUpdated(true)
-  //     })
-  //     .catch(() => props.alert({ heading: 'Nah...', message: 'That didn\'t work', variant: 'danger' }))
-  // }
 
   const addVote = function () {
     choice.vote += 1
     updateVote()
   }
 
-  // if (voted) {
-  //   addVote()
-  // }
-
   if (updated) {
-    console.log(arr[0] + 'Hooray')
     return <Redirect to={`/subjects/${arr[0]}`} />
   }
 
@@ -115,15 +65,6 @@ const ChoiceEdit = (props) => {
       {choice.vote}
     </div>
   )
-
-  // return (
-  //   <ChoiceForm
-  //     props={props}
-  //     choice={choice}
-  //     handleChange={handleChange}
-  //     cancelPath={`#home/${props.match.params.id}`}
-  //   />
-  // )
 }
 
 export default withRouter(ChoiceEdit)

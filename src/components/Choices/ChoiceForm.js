@@ -41,7 +41,7 @@ const ChoiceForm = ({ props, subjectId, choice, handleSubmit, handleChange, canc
         <Form.Group>
           <Form.Label>Vote</Form.Label>
           <Form.Control
-            required
+            type="hidden"
             placeholder="Vote..."
             value={choice.vote}
             name="vote"
