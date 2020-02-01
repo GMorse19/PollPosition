@@ -25,9 +25,12 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar collapseOnSelect fixed="top" bg="secondary" variant="dark" expand="md">
+  <Navbar collapseOnSelect fixed="top" bg="transparent" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      react-auth-template
+      <img
+        src='./Poll.jpg'
+        style= {{ margin: '0 auto', width: '20vw', height: '10vw' }}
+      />
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

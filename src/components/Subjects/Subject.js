@@ -61,7 +61,7 @@ const Subject = props => {
       <Col lg={3} xs={3} md={3}>
         <div className='menu-item'>
           <div>
-            {<Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
+            {<Card className='menu-item' style={{ backgroundColor: '#A3FFB0' }}>
               <Card.Body>
                 <Card.Title className='title'>{choice.name}</Card.Title>
                 <Card.Text style={{ color: 'blue' }}>
