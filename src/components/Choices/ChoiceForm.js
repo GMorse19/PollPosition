@@ -9,17 +9,16 @@ const ChoiceForm = ({ props, subjectId, choice, handleSubmit, handleChange, canc
     <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <Form onSubmit={handleSubmit}>
         <Form.Group>
-          <Form.Label htmlFor="content">Subject_id</Form.Label>
+          <Form.Label htmlFor="content"></Form.Label>
           <Form.Control
-            required
-            type="text"
+            type="hidden"
             value={choice.subject_id}
             name="subject_id"
             onChange={handleChange}
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label htmlFor="content">Name</Form.Label>
+          <Form.Label htmlFor="content">TITLE</Form.Label>
           <Form.Control
             required
             type="text"
@@ -29,7 +28,7 @@ const ChoiceForm = ({ props, subjectId, choice, handleSubmit, handleChange, canc
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Description</Form.Label>
+          <Form.Label>DESCRIPTION</Form.Label>
           <Form.Control
             required
             placeholder="Category..."
@@ -39,7 +38,7 @@ const ChoiceForm = ({ props, subjectId, choice, handleSubmit, handleChange, canc
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Vote</Form.Label>
+          <Form.Label></Form.Label>
           <Form.Control
             type="hidden"
             placeholder="Vote..."
@@ -50,7 +49,7 @@ const ChoiceForm = ({ props, subjectId, choice, handleSubmit, handleChange, canc
         </Form.Group>
 
         <Button variant="primary" type="submit">Submit</Button>
-        <Link to="/choices">
+        <Link to="/">
           <Button>Cancel</Button>
         </Link>
       </Form>

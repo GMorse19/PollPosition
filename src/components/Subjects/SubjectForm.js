@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 const SubjectForm = ({ subject, handleSubmit, handleChange, cancelPath }) => (
-  <div className="subject-board row">
+  <div className="subject-board row body">
     <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <Form onSubmit={handleSubmit}>
         <Form.Group>

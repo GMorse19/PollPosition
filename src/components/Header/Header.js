@@ -25,7 +25,7 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar collapseOnSelect fixed="top" bg="transparent" variant="dark" expand="md">
+  <Navbar collapseOnSelect fixed="top" style={{ backgroundColor: 'black' }} variant="dark" expand="md">
     <Navbar.Brand href="#">
       <img
         src='./Poll.jpg'

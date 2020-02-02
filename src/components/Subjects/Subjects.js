@@ -39,7 +39,7 @@ const Subjects = props => {
   ))
 
   return (
-    <div>
+    <div className="page-content">
       <div style={{ textAlign: 'center' }}>
         <h1>Choose an Event</h1>
         <p>Add a choice or cast a vote!</p>

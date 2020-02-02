@@ -38,7 +38,7 @@ const SubjectCreate = props => {
   }
 
   return (
-    <div className="subject-board">
+    <div className="subject-board body">
       <SubjectForm
         subject={subject}
         handleChange={handleChange}

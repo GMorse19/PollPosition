@@ -15,6 +15,7 @@ const Subject = props => {
   const [subject, setSubject] = useState(null)
   const userId = props.user ? props.user.id : null
   const [voted, setVoted] = useState(null)
+  const [showChoice, setShowChoice] = useState(true)
 
   useEffect(() => {
     axios({
@@ -52,12 +53,16 @@ const Subject = props => {
     console.log(voted)
   }
 
+  const handleShow = function () {
+    setShowChoice()
+  }
+
   if (!subject) {
     return <p>Loading...</p>
   }
 
   const choicesJsx = subject.choices.map(choice => (
-    <div className='homepage' key={choice.id}>
+    <div className='homepage page-content' key={choice.id}>
       <Col lg={3} xs={3} md={3}>
         <div className='menu-item'>
           <div>
@@ -89,35 +94,37 @@ const Subject = props => {
   ))
 
   return (
-    <div className="padding subject-board">
-      <div className="">
-        {userId === subject.user.id && <Button href={`#subjects/${props.match.params.id}/edit`} variant="primary" className="mr-2">Update Your Subject</Button>}
-        {userId === subject.user.id && <Button onClick={handleDelete} className="btn btn-danger">Remove Your Subject</Button>}
-      </div>
-      <h1 className="subject-header" style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>{subject.title}</h1>
-      <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Row style={{ width: '18rem' }}>
-          <Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
-            <Card.Text>
-              <div className=''>
-                <h5 className='title' style={{ color: 'blue' }}>Description:</h5><p style={{ color: 'blue' }} className='subtitle'>{subject.description}</p>
-                <h5 className='title' style={{ color: 'blue' }}>Created by:</h5><p style={{ color: 'blue' }} className='subtitle'>{subject.user.email}</p>
-              </div>
-            </Card.Text>
-          </Card>
-        </Row>
-      </Container>
-      <h2 style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers', textDecorationLine: 'Underline' }}>Choices</h2>
-      <div>
-        <Button href={`#subjects/${props.match.params.id}/create-choice`} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
-      </div>
-      <div className='directory-menu'>
-        <Container>
-          <Row>
-            {choicesJsx}
+    <div className="subject-board page-content">
+      {showChoice && <div>
+        <div className="">
+          {userId === subject.user.id && <Button href={`#subjects/${props.match.params.id}/edit`} variant="primary" className="mr-2">Update Your Subject</Button>}
+          {userId === subject.user.id && <Button onClick={handleDelete} className="btn btn-danger">Remove Your Subject</Button>}
+        </div>
+        <h1 className="subject-header" style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>{subject.title}</h1>
+        <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Row style={{ width: '18rem' }}>
+            <Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
+              <Card.Text>
+                <div className=''>
+                  <h5 className='title' style={{ color: 'blue' }}>Description:</h5><p style={{ color: 'blue' }} className='subtitle'>{subject.description}</p>
+                  <h5 className='title' style={{ color: 'blue' }}>Created by:</h5><p style={{ color: 'blue' }} className='subtitle'>{subject.user.email}</p>
+                </div>
+              </Card.Text>
+            </Card>
           </Row>
         </Container>
-      </div>
+        <h2 style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers', textDecorationLine: 'Underline' }}>Choices</h2>
+        <div>
+          <Button href={`#subjects/${props.match.params.id}/create-choice`} onClick={handleShow} handleShow={handleShow} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
+        </div>
+        <div className='directory-menu'>
+          <Container>
+            <Row>
+              {choicesJsx}
+            </Row>
+          </Container>
+        </div>
+      </div>}
     </div>
   )
 }
