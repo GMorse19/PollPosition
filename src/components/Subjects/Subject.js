@@ -87,11 +87,11 @@ const Subject = props => {
 
   const likesJsx = subject.likes.map(like => (
     <div key={like.id}>
-      <p>{like.id}</p>
+      <p>**{like.id} : {like.user_id}**</p>
     </div>
   ))
 
-  if (subject.likes.some(e => e.id === userId)) {
+  if (subject.likes.some(e => e.user_id === userId)) {
     console.log('YeeHaw!!!')
     likeId = false
   }
