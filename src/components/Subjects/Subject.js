@@ -13,16 +13,15 @@ import apiUrl from '../../apiConfig'
 
 const Subject = props => {
   const [subject, setSubject] = useState(null)
+  const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
   const userId = props.user ? props.user.id : null
-  const [voted, setVoted] = useState(null)
   const [showChoice, setShowChoice] = useState(true)
   const [like, setLike] = useState({ subject_id: '' })
-  // const [likeId, setLikeId] = useState(false)
   let likeId = true
 
-  console.log(like)
-  console.log(subject)
+  console.log('Choice' + choice)
 
+  // GET subject by id
   useEffect(() => {
     axios({
       url: `${apiUrl}/subjects/${props.match.params.id}`,
@@ -32,10 +31,10 @@ const Subject = props => {
       }
     })
       .then(res => setSubject(res.data.subject))
-      .then(() => setVoted(false))
       .catch(console.error)
-  }, [voted])
+  }, [like])
 
+  // Delete a subject if owned by user
   const handleDelete = event => {
     console.log(props.match.params.id)
     axios({
@@ -54,9 +53,9 @@ const Subject = props => {
       }, [])
   }
 
+  // Handle the vote button when clicked
+  // Creates a 'like' resource
   const handleClick = event => {
-    // setVoted()
-    // console.log(voted)
     axios({
       url: `${apiUrl}/likes`,
       method: 'POST',
@@ -71,31 +70,50 @@ const Subject = props => {
       }
     })
       .then(res => {
-        setLike({ subject_id: subject.id })
-        // console.log(like)
+        setLike(res.data.like)
       })
       .catch(console.error)
   }
 
+  const updateVote = event => {
+    const addVote = event.vote + 1
+    console.log('updateVote VOTE here: ' + addVote)
+    handleClick()
+    axios({
+      url: `${apiUrl}/choices/${event.id}`,
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Token token=${props.user.token}`
+      },
+      data: {
+        choice: {
+          vote: addVote
+        }
+      }
+    })
+      .then(res => {
+        setChoice(res.data.choice)
+        props.history.push(`choices/${res.data.choice.id}`)
+      })
+      .catch(console.error)
+  }
+
+  // Hide/Show Subject info while creating a choice
   const handleShow = function () {
     setShowChoice()
   }
 
+  // Check to see if a subject has been set
   if (!subject) {
     return <p>Loading...</p>
   }
 
-  const likesJsx = subject.likes.map(like => (
-    <div key={like.id}>
-      <p>**{like.id} : {like.user_id}**</p>
-    </div>
-  ))
-
+  // CHECK TO SEE IF A USER HAS VOTED
   if (subject.likes.some(e => e.user_id === userId)) {
-    console.log('YeeHaw!!!')
     likeId = false
   }
 
+  // Map over choices that belong_to Subject
   const choicesJsx = subject.choices.map(choice => (
     <div className='homepage page-content' key={choice.id}>
       <Col lg={3} xs={3} md={3}>
@@ -112,11 +130,10 @@ const Subject = props => {
                   Vote Count - {choice.vote}
                 </Card.Text>
                 {likeId && <Button
-                  href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`}
                   subject={subject}
                   choice={choice}
-                  props={props}
-                  onClick={handleClick}
+                  props={choice}
+                  onClick={() => updateVote(choice)}
                   variant="danger"
                   className="mr-2">
                   Vote
@@ -175,7 +192,6 @@ const Subject = props => {
             <Row>
               {choicesJsx}
             </Row>
-            {userId !== like.id && <Row>{likesJsx}</Row>}
           </Container>
         </div>
       </div>}

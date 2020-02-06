@@ -25,6 +25,8 @@ const Subjects = props => {
       .catch(console.error)
   }, [])
 
+  // console.log(subjects)
+
   const subjectsJsx = subjects.map(subject => (
     <div className='homepage' key={subject.id}>
       {<Col lg={3} xs={3} md={3}>
