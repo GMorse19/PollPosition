@@ -16,6 +16,12 @@ const Subject = props => {
   const userId = props.user ? props.user.id : null
   const [voted, setVoted] = useState(null)
   const [showChoice, setShowChoice] = useState(true)
+  const [like, setLike] = useState({ subject_id: '' })
+  // const [likeId, setLikeId] = useState(false)
+  let likeId = true
+
+  console.log(like)
+  console.log(subject)
 
   useEffect(() => {
     axios({
@@ -48,9 +54,27 @@ const Subject = props => {
       }, [])
   }
 
-  const handleClick = function () {
-    setVoted()
-    console.log(voted)
+  const handleClick = event => {
+    // setVoted()
+    // console.log(voted)
+    axios({
+      url: `${apiUrl}/likes`,
+      method: 'POST',
+      headers: {
+        'Authorization': `Token token=${props.user.token}`
+      },
+      data: {
+        like:
+        {
+          subject_id: subject.id
+        }
+      }
+    })
+      .then(res => {
+        setLike({ subject_id: subject.id })
+        // console.log(like)
+      })
+      .catch(console.error)
   }
 
   const handleShow = function () {
@@ -59,6 +83,17 @@ const Subject = props => {
 
   if (!subject) {
     return <p>Loading...</p>
+  }
+
+  const likesJsx = subject.likes.map(like => (
+    <div key={like.id}>
+      <p>{like.id}</p>
+    </div>
+  ))
+
+  if (subject.likes.some(e => e.id === userId)) {
+    console.log('YeeHaw!!!')
+    likeId = false
   }
 
   const choicesJsx = subject.choices.map(choice => (
@@ -76,15 +111,16 @@ const Subject = props => {
                   <br />
                   Vote Count - {choice.vote}
                 </Card.Text>
-                <Button
+                {likeId && <Button
                   href={`#subjects/${props.match.params.id}/choices/${choice.id}/edit-choice`}
                   subject={subject}
                   choice={choice}
+                  props={props}
                   onClick={handleClick}
                   variant="danger"
                   className="mr-2">
                   Vote
-                </Button>
+                </Button>}
               </Card.Body>
             </Card>}
           </div>
@@ -97,31 +133,49 @@ const Subject = props => {
     <div className="subject-board page-content">
       {showChoice && <div>
         <div className="">
-          {userId === subject.user.id && <Button href={`#subjects/${props.match.params.id}/edit`} variant="primary" className="mr-2">Update Your Subject</Button>}
-          {userId === subject.user.id && <Button onClick={handleDelete} className="btn btn-danger">Remove Your Subject</Button>}
+          {userId === subject.user.id &&
+            <Button href={`#subjects/${props.match.params.id}/edit`}
+              variant="primary"
+              className="mr-2">Update Your Subject</Button>}
+          {userId === subject.user.id &&
+            <Button onClick={handleDelete}
+              className="btn btn-danger">Remove Your Subject</Button>}
         </div>
-        <h1 className="subject-header" style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>{subject.title}</h1>
+        <h1 className="subject-header"
+          style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>
+          {subject.title}
+        </h1>
         <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Row style={{ width: '18rem' }}>
             <Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
               <Card.Text>
-                <div className=''>
-                  <h5 className='title' style={{ color: 'blue' }}>Description:</h5><p style={{ color: 'blue' }} className='subtitle'>{subject.description}</p>
-                  <h5 className='title' style={{ color: 'blue' }}>Created by:</h5><p style={{ color: 'blue' }} className='subtitle'>{subject.user.email}</p>
-                </div>
+                <span className='title' style={{ color: 'blue' }}>Description:</span>
+                <span style={{ color: 'blue' }} className='subtitle'>{subject.description}</span>
+                <span className='title' style={{ color: 'blue' }}>Created by:</span>
+                <span style={{ color: 'blue' }} className='subtitle'>{subject.user.email}</span>
               </Card.Text>
             </Card>
           </Row>
         </Container>
-        <h2 style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers', textDecorationLine: 'Underline' }}>Choices</h2>
+        <h2 style={{ color: '#fad1ad',
+          fontSize: '100px',
+          fontFamily: 'Bangers',
+          textDecorationLine: 'Underline' }}>
+        Choices
+        </h2>
         <div>
-          <Button href={`#subjects/${props.match.params.id}/create-choice`} onClick={handleShow} handleShow={handleShow} subject={subject} variant="primary" className="mr-2">Add a Choice</Button>
+          <Button href={`#subjects/${props.match.params.id}/create-choice`}
+            onClick={handleShow}
+            subject={subject}
+            variant="primary"
+            className="mr-2">Add a Choice</Button>
         </div>
         <div className='directory-menu'>
           <Container>
             <Row>
               {choicesJsx}
             </Row>
+            {userId !== like.id && <Row>{likesJsx}</Row>}
           </Container>
         </div>
       </div>}
