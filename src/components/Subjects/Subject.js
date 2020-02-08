@@ -17,7 +17,8 @@ const Subject = props => {
   const userId = props.user ? props.user.id : null
   const [showChoice, setShowChoice] = useState(true)
   const [like, setLike] = useState({ subject_id: '' })
-  let likeId = true
+  // const [leaders, setLeaders] = useState([])
+  // let likeId = true
 
   console.log('Choice' + choice)
 
@@ -109,10 +110,50 @@ const Subject = props => {
   }
 
   // CHECK TO SEE IF A USER HAS VOTED
-  if (subject.likes.some(e => e.user_id === userId)) {
-    likeId = false
-  }
+  // if (subject.likes.some(e => e.user_id === userId)) {
+  //   likeId = false
+  // }
+  // let one = []
+  // const checkVote = function (e) {
+  //   const leaders = []
+  //   e.sort(function (a, b) { return a - b })
+  //   leaders.push(e.slice(-3))
+  //   leaders.toString().split('')
+  //   one = leaders[0].reverse()
+  // }
+  // console.log('One Array Here: ' + one)
+  // const tally = function () {
+  //   const arr = []
+  //   subject.choices.map((c) => {
+  //     arr.push(c.vote)
+  //   })
+  //   checkVote(arr)
+  // }
 
+  // let leaders = []
+  const leaders = subject.choices.map(c => {
+    const arr = []
+    arr.push(c)
+    return arr.sort((a, b) => (a.vote > b.vote) ? 1 : -1).slice(-3).reverse()
+  })
+  const answer = leaders.map(i => (
+    <div key={i.name}>
+      {leaders.name} Votes= {leaders.vote}
+    </div>))
+
+  // const arr = []
+
+  // one.map(i => (
+  //   <div key={i.id}>
+  //     {one.name} Votes= {one.vote}
+  //   </div>
+  // ))
+  // console.log(arr)
+  // one = leaders.reverse()
+  // arr.sort(function (a, b) { return a - b })
+  // checkVote(arr)
+
+  // tally()
   // Map over choices that belong_to Subject
   const choicesJsx = subject.choices.map(choice => (
     <div className='homepage page-content' key={choice.id}>
@@ -129,7 +170,7 @@ const Subject = props => {
                   <br />
                   Vote Count - {choice.vote}
                 </Card.Text>
-                {likeId && <Button
+                <Button
                   subject={subject}
                   choice={choice}
                   props={choice}
@@ -137,7 +178,7 @@ const Subject = props => {
                   variant="danger"
                   className="mr-2">
                   Vote
-                </Button>}
+                </Button>
               </Card.Body>
             </Card>}
           </div>
@@ -189,6 +230,9 @@ const Subject = props => {
         </div>
         <div className='directory-menu'>
           <Container>
+            <p style={{ textAlign: 'center' }}>
+              {answer}
+            </p>
             <Row>
               {choicesJsx}
             </Row>
