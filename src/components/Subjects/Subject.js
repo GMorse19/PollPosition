@@ -15,12 +15,19 @@ const Subject = props => {
   const [subject, setSubject] = useState(null)
   const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
   const userId = props.user ? props.user.id : null
+
+  // Show the create choice form
   const [showChoice, setShowChoice] = useState(true)
   const [like, setLike] = useState({ subject_id: '' })
-  // const [leaders, setLeaders] = useState([])
-  // let likeId = true
 
-  console.log('Choice' + choice)
+  // Show or hide Vote Button
+  let likeId = true
+  // Create an array for the top three choices by vote count
+  let leaders = []
+  // Make sure there's a subject first
+  if (subject) {
+    leaders = subject.choices.sort((a, b) => (a.vote > b.vote) ? 1 : -1).slice(-3).reverse()
+  }
 
   // GET subject by id
   useEffect(() => {
@@ -76,9 +83,10 @@ const Subject = props => {
       .catch(console.error)
   }
 
+  // Update the vote count when a vote is registered
   const updateVote = event => {
+    choice.id = event.id
     const addVote = event.vote + 1
-    console.log('updateVote VOTE here: ' + addVote)
     handleClick()
     axios({
       url: `${apiUrl}/choices/${event.id}`,
@@ -110,50 +118,17 @@ const Subject = props => {
   }
 
   // CHECK TO SEE IF A USER HAS VOTED
-  // if (subject.likes.some(e => e.user_id === userId)) {
-  //   likeId = false
-  // }
-  // let one = []
-  // const checkVote = function (e) {
-  //   const leaders = []
-  //   e.sort(function (a, b) { return a - b })
-  //   leaders.push(e.slice(-3))
-  //   leaders.toString().split('')
-  //   one = leaders[0].reverse()
-  // }
-  // console.log('One Array Here: ' + one)
-  // const tally = function () {
-  //   const arr = []
-  //   subject.choices.map((c) => {
-  //     arr.push(c.vote)
-  //   })
-  //   checkVote(arr)
-  // }
+  if (subject.likes.some(e => e.user_id === userId)) {
+    likeId = false
+  }
 
-  // let leaders = []
-  const leaders = subject.choices.map(c => {
-    const arr = []
-    arr.push(c)
-    return arr.sort((a, b) => (a.vote > b.vote) ? 1 : -1).slice(-3).reverse()
-  })
+  // Map over the top three choices by vote count
   const answer = leaders.map(i => (
-    <div key={i.name}>
-      {leaders.name} Votes= {leaders.vote}
-    </div>))
+    <div key={i.id}>
+      {i.name} Votes= {i.vote}
+    </div>
+  ))
 
-  // const arr = []
-
-  // one.map(i => (
-  //   <div key={i.id}>
-  //     {one.name} Votes= {one.vote}
-  //   </div>
-  // ))
-  // console.log(arr)
-  // one = leaders.reverse()
-  // arr.sort(function (a, b) { return a - b })
-  // checkVote(arr)
-
-  // tally()
   // Map over choices that belong_to Subject
   const choicesJsx = subject.choices.map(choice => (
     <div className='homepage page-content' key={choice.id}>
@@ -170,7 +145,7 @@ const Subject = props => {
                   <br />
                   Vote Count - {choice.vote}
                 </Card.Text>
-                <Button
+                {likeId && <Button
                   subject={subject}
                   choice={choice}
                   props={choice}
@@ -178,7 +153,7 @@ const Subject = props => {
                   variant="danger"
                   className="mr-2">
                   Vote
-                </Button>
+                </Button>}
               </Card.Body>
             </Card>}
           </div>
@@ -230,9 +205,10 @@ const Subject = props => {
         </div>
         <div className='directory-menu'>
           <Container>
-            <p style={{ textAlign: 'center' }}>
+            <h4 style={{ textAlign: 'center' }}>
+            LEADERS
               {answer}
-            </p>
+            </h4>
             <Row>
               {choicesJsx}
             </Row>
