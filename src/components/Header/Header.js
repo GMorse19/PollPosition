@@ -1,26 +1,50 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
-    <Nav.Link href="#create-subject">Create Subject</Nav.Link>
-    <Nav.Link href="#subjects">List Subjects</Nav.Link>
+    <ButtonToolbar>
+      <DropdownButton
+        drop={'left'}
+        variant={'secondary'}
+        title={'Log In/Out'}
+        id={'dropdown-button-drop-left'}
+        key={'left'}
+      >
+        <Dropdown.Item href="#/">Home</Dropdown.Item>
+        <Dropdown.Item href="#create-subject">Create Subject</Dropdown.Item>
+        <Dropdown.Item href="#subjects">List Subjects</Dropdown.Item>
+        <Dropdown.Item href="#change-password">Change Password</Dropdown.Item>
+        <Dropdown.Item href="#sign-out">Sign Out</Dropdown.Item>
+      </DropdownButton>
+    </ButtonToolbar>
   </Fragment>
 )
 
 const unauthenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#sign-up">Sign Up</Nav.Link>
-    <Nav.Link href="#sign-in">Sign In</Nav.Link>
+    <ButtonToolbar>
+      <DropdownButton
+        drop={'left'}
+        variant={'secondary'}
+        title={'Log In/Out'}
+        id={'dropdown-button-drop-left'}
+        key={'left'}
+      >
+        <Dropdown.Item href="#/">Home</Dropdown.Item>
+        <Dropdown.Item href="#sign-in">Sign In</Dropdown.Item>
+        <Dropdown.Item href="#sign-up">Sign Up</Dropdown.Item>
+      </DropdownButton>
+    </ButtonToolbar>
   </Fragment>
 )
 
 const alwaysOptions = (
   <Fragment>
-    <Nav.Link href="#/">Home</Nav.Link>
   </Fragment>
 )
 
@@ -32,10 +56,10 @@ const Header = ({ user }) => (
         style= {{ margin: '0 auto', width: '20vw', height: '10vw' }}
       />
     </Navbar.Brand>
+    <Nav>{ user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}</Nav>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
-        { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
         { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
