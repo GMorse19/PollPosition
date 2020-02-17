@@ -179,7 +179,7 @@ const Subject = props => {
           {subject.title}
         </h1>
         <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Row style={{ width: '18rem' }}>
+          <Row className="box" style={{ width: '18rem' }}>
             <Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
               <Card.Text>
                 <span className='title' style={{ color: 'blue' }}>Description:</span>
@@ -209,7 +209,7 @@ const Subject = props => {
             LEADERS
               {answer}
             </h4>
-            <Row>
+            <Row className="box">
               {choicesJsx}
             </Row>
           </Container>

@@ -48,7 +48,7 @@ const Subjects = props => {
       </div>
       <div className='directory-menu'>
         <Container>
-          <Row>
+          <Row className="box">
             {subjectsJsx}
           </Row>
         </Container>
