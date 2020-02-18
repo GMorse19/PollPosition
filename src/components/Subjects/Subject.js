@@ -135,15 +135,11 @@ const Subject = props => {
       <Col lg={3} xs={3} md={3}>
         <div className='menu-item'>
           <div>
-            {<Card className='menu-item' style={{ backgroundColor: '#A3FFB0' }}>
+            {<Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
               <Card.Body>
-                <Card.Title className='title'>{choice.name}</Card.Title>
+                <Card.Header style={{ color: 'blue' }} className='title'>{choice.name}</Card.Header>
                 <Card.Text style={{ color: 'blue' }}>
-                  Description:
-                  <br />
-                  {choice.description}
-                  <br />
-                  Vote Count - {choice.vote}
+                  Description: {choice.description}
                 </Card.Text>
                 {likeId && <Button
                   subject={subject}
@@ -154,6 +150,7 @@ const Subject = props => {
                   className="mr-2">
                   Vote
                 </Button>}
+                <Card.Footer style={{ color: 'blue' }}>Vote Count - {choice.vote}</Card.Footer>
               </Card.Body>
             </Card>}
           </div>
@@ -164,32 +161,33 @@ const Subject = props => {
 
   return (
     <div className="subject-board page-content">
+      <h1 className="subject-header"
+        style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>
+        {subject.title}
+      </h1>
+      <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Row className="box" style={{ width: '50%' }}>
+          <Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
+            <Card.Body>
+              <Card.Header style={{ color: 'blue' }}>Description</Card.Header>
+              <Card.Text style={{ color: 'blue' }}>
+                {subject.description}
+              </Card.Text>
+            </Card.Body>
+            <Card.Footer style={{ color: 'blue' }}>Created by: {subject.user.email}</Card.Footer>
+          </Card>
+        </Row>
+      </Container>
       {showChoice && <div>
         <div className="">
           {userId === subject.user.id &&
-            <Button href={`#subjects/${props.match.params.id}/edit`}
-              variant="primary"
-              className="mr-2">Update Your Subject</Button>}
+              <Button href={`#subjects/${props.match.params.id}/edit`}
+                variant="primary"
+                className="mr-2">Update Your Subject</Button>}
           {userId === subject.user.id &&
-            <Button onClick={handleDelete}
-              className="btn btn-danger">Remove Your Subject</Button>}
+              <Button onClick={handleDelete}
+                className="btn btn-danger">Remove Your Subject</Button>}
         </div>
-        <h1 className="subject-header"
-          style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>
-          {subject.title}
-        </h1>
-        <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Row className="box" style={{ width: '18rem' }}>
-            <Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
-              <Card.Text>
-                <span className='title' style={{ color: 'blue' }}>Description:</span>
-                <span style={{ color: 'blue' }} className='subtitle'>{subject.description}</span>
-                <span className='title' style={{ color: 'blue' }}>Created by:</span>
-                <span style={{ color: 'blue' }} className='subtitle'>{subject.user.email}</span>
-              </Card.Text>
-            </Card>
-          </Row>
-        </Container>
         <h2 style={{ color: '#fad1ad',
           fontSize: '100px',
           fontFamily: 'Bangers',
