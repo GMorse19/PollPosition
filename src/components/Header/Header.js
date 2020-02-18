@@ -11,7 +11,7 @@ const authenticatedOptions = (
       <DropdownButton
         drop={'left'}
         variant={'secondary'}
-        title={'Log In/Out'}
+        title={'Options'}
         id={'dropdown-button-drop-left'}
         key={'left'}
       >
@@ -31,7 +31,7 @@ const unauthenticatedOptions = (
       <DropdownButton
         drop={'left'}
         variant={'secondary'}
-        title={'Log In/Out'}
+        title={'Sign In/Up'}
         id={'dropdown-button-drop-left'}
         key={'left'}
       >
