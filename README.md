@@ -14,14 +14,14 @@ You can find the API Repo [here](https://github.com/GMorse19/vote).
 A polling/voting app centered around creating an event with multiple
 choices that users can add to and then vote on.
 
-I began this project, mostly, to practice manipulating and working with multiple relational resources in an API. I also wanted to create something that my fellow aspiring coding enthusiasts could use to stay in touch with each other.
+I began this project, mostly, to practice manipulating and working with multiple relational resources in an API. I also wanted to create something that my fellow aspiring code enthusiasts could use to stay in touch with each other.
 
-### Event list
+### Poll list
 ![EventList](SubjectList.png)
 
 I figured what better way to do this than to build an app for scheduling coding practices or hackathons.
 
-Poll Position(working title) is designed to display a user created event event that multiple people can add choices to, anonymously vote on and then tally the votes and see what selection will be chosen for the event date.
+Poll Position(working title) is designed to display a user created event that multiple people can add choices to, anonymously vote on and then tally the votes and see what selection will be chosen for the event date.
 
 ### Choice list
 ![ChoiceList](ChoiceList.png)
