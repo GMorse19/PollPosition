@@ -1,6 +1,6 @@
 {
-  "name": "vote-client",
-  "homepage": "https://gmorse19.github.io/vote-client",
+  "name": "PollPosition",
+  "homepage": "https://gmorse19.github.io/PollPosition/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
