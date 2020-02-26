@@ -15,6 +15,7 @@ import SubjectEdit from '../Subjects/SubjectEdit.js'
 import ChoiceCreate from '../Choices/ChoiceCreate.js'
 import ChoiceEdit from '../Choices/ChoiceEdit.js'
 import Home from '../Home/Home.js'
+import Poll from '../Poll/Poll.js'
 
 class App extends Component {
   constructor () {
@@ -54,6 +55,9 @@ class App extends Component {
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn alert={this.alert} setUser={this.setUser} />
+          )} />
+          <Route path='/polls' render={() => (
+            <Poll />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />

@@ -38,6 +38,7 @@ const unauthenticatedOptions = (
         <Dropdown.Item href="#/">Home</Dropdown.Item>
         <Dropdown.Item href="#sign-in">Sign In</Dropdown.Item>
         <Dropdown.Item href="#sign-up">Sign Up</Dropdown.Item>
+        <Dropdown.Item href="#polls">List Polls</Dropdown.Item>
       </DropdownButton>
     </ButtonToolbar>
   </Fragment>
