@@ -5,7 +5,6 @@
 
 [API Repo](https://github.com/GMorse19/PollPositionAPI).
 
-![ERD](ERD.png)
 
 ### Home page
 ![HomePage](HomePage.png)
