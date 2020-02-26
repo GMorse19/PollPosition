@@ -25,8 +25,6 @@ const Subjects = props => {
       .catch(console.error)
   }, [])
 
-  // console.log(subjects)
-
   const subjectsJsx = subjects.map(subject => (
     <div className='homepage' key={subject.id}>
       {<Col lg={3} xs={3} md={3}>
@@ -43,8 +41,8 @@ const Subjects = props => {
   return (
     <div className="page-content">
       <div style={{ textAlign: 'center' }}>
-        <h1>Choose an Event</h1>
-        <p>Add a choice or cast a vote!</p>
+        <h1>Choose A Poll</h1>
+        <p>Add a choice to a Poll or cast a vote!</p>
       </div>
       <div className='directory-menu'>
         <Container>

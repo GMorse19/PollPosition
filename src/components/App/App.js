@@ -13,7 +13,6 @@ import Subjects from '../Subjects/Subjects.js'
 import SubjectCreate from '../Subjects/SubjectCreate.js'
 import SubjectEdit from '../Subjects/SubjectEdit.js'
 import ChoiceCreate from '../Choices/ChoiceCreate.js'
-import Choices from '../Choices/Choices.js'
 import ChoiceEdit from '../Choices/ChoiceEdit.js'
 import Home from '../Home/Home.js'
 
@@ -76,9 +75,6 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/subjects/:id/edit' render={() => (
             <SubjectEdit alert={this.alert} user={user} />
-          )} />
-          <AuthenticatedRoute user={user} exact path='/choices' render={() => (
-            <Choices alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/subjects/:id/create-choice' render={() => (
             <ChoiceCreate alert={this.alert} user={user} />

@@ -125,7 +125,7 @@ const Subject = props => {
   // Map over the top three choices by vote count
   const answer = leaders.map(i => (
     <div key={i.id}>
-      {i.name} Votes= {i.vote}
+      <h5> {i.name} :: <span style={{ color: 'red' }}>{i.vote}</span> votes</h5>
     </div>
   ))
 
@@ -161,29 +161,20 @@ const Subject = props => {
 
   return (
     <div className="subject-board page-content">
-      <h1 className="subject-header"
-        style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>
-        {subject.title}
-      </h1>
-      <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Row className="box" style={{ width: '50%' }}>
-          <Card className='menu-item' style={{ backgroundColor: '#fae4ad' }}>
-            <Card.Body>
-              <Card.Header style={{ color: 'blue' }}>Description</Card.Header>
-              <Card.Text style={{ color: 'blue' }}>
-                {subject.description}
-              </Card.Text>
-            </Card.Body>
-            <Card.Footer style={{ color: 'blue' }}>Created by: {subject.user.email}</Card.Footer>
-          </Card>
-        </Row>
-      </Container>
+      <div style={{ marginBottom: '20px' }}>
+        <h1 className="subject-header"
+          style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>
+          {subject.title}
+        </h1>
+        <h3>{subject.description}</h3>
+      Created by: {subject.user.email}
+      </div>
       {showChoice && <div>
         <div className="">
           {userId === subject.user.id &&
-              <Button href={`#subjects/${props.match.params.id}/edit`}
-                variant="primary"
-                className="mr-2">Update Your Subject</Button>}
+        <Button href={`#subjects/${props.match.params.id}/edit`}
+          variant="primary"
+          className="mr-2">Update Your Subject</Button>}
           {userId === subject.user.id &&
               <Button onClick={handleDelete}
                 className="btn btn-danger">Remove Your Subject</Button>}
@@ -194,22 +185,22 @@ const Subject = props => {
           textDecorationLine: 'Underline' }}>
         Choices
         </h2>
-        <div>
-          <Button href={`#subjects/${props.match.params.id}/create-choice`}
-            onClick={handleShow}
-            subject={subject}
-            variant="primary"
-            className="mr-2">Add a Choice</Button>
-        </div>
         <div className='directory-menu'>
           <Container>
             <h4 style={{ textAlign: 'center' }}>
-            LEADERS
-              {answer}
+            VOTE LEADERS
             </h4>
+            {answer}
             <Row className="box">
               {choicesJsx}
             </Row>
+            <div>
+              <Button style={{ marginBottom: '50px' }} href={`#subjects/${props.match.params.id}/create-choice`}
+                onClick={handleShow}
+                subject={subject}
+                variant="primary"
+                className="mr-2">Add a Choice</Button>
+            </div>
           </Container>
         </div>
       </div>}

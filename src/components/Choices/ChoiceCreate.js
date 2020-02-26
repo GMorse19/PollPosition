@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import apiUrl from '../../apiConfig'
 import ChoiceForm from './ChoiceForm.js'
 
@@ -26,8 +26,7 @@ const ChoiceCreate = props => {
     })
       .then(response => {
         props.alert({ heading: 'Success', message: 'You created a choice', variant: 'success' })
-        props.history.push(`choices/${response.data.choice.id}`)
-        return <Redirect to={'/subjects/'} />
+        props.history.push('/subjects')
       })
       .catch(console.error)
   }

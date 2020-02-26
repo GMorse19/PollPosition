@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 const ChoiceForm = ({ props, subjectId, choice, handleSubmit, handleChange, cancelPath }) => (
   <div className="subject-board row">
     <div className="col-sm-10 col-md-8 mx-auto mt-5">
+      <h1>Create A Choice</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label htmlFor="content"></Form.Label>
@@ -48,9 +49,9 @@ const ChoiceForm = ({ props, subjectId, choice, handleSubmit, handleChange, canc
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">Submit</Button>
+        <Button style={{ margin: '10px' }} variant="primary" type="submit">Submit</Button>
         <Link to="/">
-          <Button>Cancel</Button>
+          <Button style={{ margin: '10px' }}>Cancel</Button>
         </Link>
       </Form>
     </div>
