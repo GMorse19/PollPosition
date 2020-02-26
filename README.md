@@ -1,13 +1,12 @@
-## Work in progress!!
-The client side is being built with [React.js](https://reactjs.org).
+# Poll Position
+[Deployed Client](https://gmorse19.github.io/PollPosition/).
 
-The Back End is being built with [Ruby on Rails](https://rubyonrails.org).
+[Deployed API](https://salty-cliffs-30565.herokuapp.com/).
 
-You can find the API Repo [here](https://github.com/GMorse19/vote).
+[API Repo](https://github.com/GMorse19/PollPositionAPI).
 
 ![ERD](ERD.png)
 
-# Poll Position
 ### Home page
 ![HomePage](HomePage.png)
 
