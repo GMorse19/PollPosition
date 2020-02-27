@@ -75,7 +75,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/subjects' render={() => (
             <Subjects alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/subjects/:id' render={() => (
+          <AuthenticatedRoute user={user} exact path='/subjects/:id' render={() => (
             <Subject alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create-subject' render={() => (

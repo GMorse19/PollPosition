@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 const SubjectForm = ({ subject, handleSubmit, handleChange, cancelPath }) => (
   <div className="subject-board row body">
     <div className="col-sm-10 col-md-8 mx-auto mt-5">
-      <h1>Create A Poll!</h1>
+      <h1>Create/Update A Poll!</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label htmlFor="content">Title</Form.Label>
