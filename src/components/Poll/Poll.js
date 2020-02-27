@@ -73,7 +73,7 @@ const Poll = props => {
     <div className="subject-board page-content">
       <div style={{ marginBottom: '20px' }}>
         <h2>Please Sign In/Up to create a Poll or vote</h2>
-        <p style={{ color: 'white', textAlign: 'center' }}>Sign In with email= v@v PassWord= v</p>
+        <p style={{ color: 'white', textAlign: 'center' }}>Sign In with EMAIL= v@v PASSWORD= v</p>
         <h1 className="subject-header"
           style={{ color: '#fad1ad', fontSize: '100px', fontFamily: 'Bangers' }}>
           {subject.title}
