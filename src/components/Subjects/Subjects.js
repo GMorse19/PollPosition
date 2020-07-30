@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import apiUrl from '../../apiConfig'
+// import axios from 'axios'
+// import apiUrl from '../../apiConfig'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
+
+import { getSubjects } from '../../api/subjects'
 
 import './Subject.scss'
 
@@ -12,17 +14,7 @@ const Subjects = props => {
   const [subjects, setSubjects] = useState([])
 
   useEffect(() => {
-    axios({
-      url: `${apiUrl}/subjects`,
-      method: 'GET',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      }
-    })
-      .then(response => {
-        setSubjects(response.data.subjects)
-      })
-      .catch(console.error)
+    getSubjects(setSubjects, props)
   }, [])
 
   const subjectsJsx = subjects.map(subject => (
