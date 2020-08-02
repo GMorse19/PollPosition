@@ -4,10 +4,7 @@ import axios from 'axios'
 export const getSubjects = (setSubjects, props) => {
   axios({
     url: `${apiUrl}/subjects`,
-    method: 'GET',
-    headers: {
-      'Authorization': `Token token=${props.user.token}`
-    }
+    method: 'GET'
   })
     .then(response => {
       setSubjects(response.data.subjects)
