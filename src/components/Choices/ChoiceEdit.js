@@ -3,6 +3,7 @@ import { Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
+import { patchSubject } from '../../api/subjects'
 
 const ChoiceEdit = (props) => {
   const [choice, setChoice] = useState({ subject_id: '', name: '', description: '', vote: '' })
@@ -31,27 +32,14 @@ const ChoiceEdit = (props) => {
   }
 
   const updateVote = () => {
-    axios({
-      url: `${apiUrl}/choices/${props.match.params.id}`,
-      method: 'PATCH',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      },
-      data: { choice }
-    })
-      .then(res => {
-        setUpdated(true)
-        setChoice(choice)
-        return <Redirect to={`/subjects/${arr[0]}`} />
-      })
-      .catch(console.error)
+    patchSubject(choice, props, setUpdated, 'choice', setChoice, arr)
   }
 
   const addVote = function () {
     choice.vote += 1
     updateVote()
   }
-
+  console.log(updated)
   if (updated) {
     return <Redirect to={`/subjects/${arr[0]}`} />
   }
