@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
-import axios from 'axios'
 
-import apiUrl from '../../apiConfig'
 import SubjectForm from './SubjectForm'
+import { patchSubject } from '../../api/subjects'
 
 const SubjectEdit = (props) => {
   const [subject, setSubject] = useState({ title: '', description: '' })
@@ -17,20 +16,7 @@ const SubjectEdit = (props) => {
   const handleSubmit = event => {
     event.preventDefault()
 
-    axios({
-      url: `${apiUrl}/subjects/${props.match.params.id}`,
-      method: 'PATCH',
-      headers: {
-        'Authorization': `Token token=${props.user.token}`
-      },
-      data: { subject }
-    })
-      .then(response => {
-        props.alert({ heading: 'Success', message: 'You updated a subject', variant: 'success' })
-        setUpdated(true)
-        props.history.push('/subjects')
-      })
-      .catch(() => props.alert({ heading: 'Nah...', message: 'That didn\'t work', variant: 'danger' }))
+    patchSubject(subject, props, setUpdated, 'subject')
   }
 
   if (updated) {
